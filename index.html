@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نتایج نهایی جشنواره فروش بیمه‌های آتش‌سوزی</title>
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+
+<style>
+:root {
+  --green-dark: #5a6b4d;
+  --green-mid: #7a8a6c;
+  --green-light: #9aab8c;
+  --gold-main: #c9a961;
+  --gold-light: #e0c586;
+  --gold-dark: #a88840;
+  --cream: #f7f3e8;
+  --text-dark: #3a4a2e;
+  --text-mid: #5a6b4d;
+  --peach-bg: #ffe8d1;
+  --red-accent: #c0392b;
+  --orange-accent: #e07b39;
+  --shadow-soft: 0 4px 20px rgba(90, 107, 77, 0.15);
+  --shadow-strong: 0 15px 40px rgba(90, 107, 77, 0.25);
+
+  /* رنگ‌های گروه‌ها */
+  --group-diamond: #1e5fa8;  /* الماس - آبی */
+  --group-gold: #c9a227;     /* طلا - طلایی */
+  --group-silver: #6b7280;   /* نقره - طوسی */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  font-family: 'Vazirmatn', Tahoma, sans-serif;
+  direction: rtl;
+  text-align: right;
+  background: #f0ede5;
+  color: var(--text-dark);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   مدیریت صفحه‌ها
+   ============================================================ */
+.screen {
+  display: none;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+.screen.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* ============================================================
+   صفحه اول: پاکت
+   ============================================================ */
+#envelope-screen {
+  background-image: url('assets/background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+#envelope-screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.envelope-page-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 100vh;
+  width: 100%;
+  padding: 3vh 20px 3vh;
+}
+
+.company-logo-top {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  animation: fadeInDown 1s ease backwards;
+  flex-shrink: 0;
+}
+
+.company-logo-top img {
+  max-width: 260px;
+  width: 60%;
+  height: auto;
+  filter: drop-shadow(0 4px 12px rgba(90, 107, 77, 0.2));
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.festival-title {
+  text-align: center;
+  padding: 12px 24px;
+  animation: fadeInDown 1s ease 0.2s backwards;
+  background: var(--peach-bg);
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(90, 107, 77, 0.1);
+  max-width: 90%;
+  flex-shrink: 0;
+}
+
+.festival-department {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--orange-accent);
+  margin-bottom: 8px;
+  line-height: 1.5;
+  letter-spacing: -0.2px;
+}
+
+.festival-title h1 {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--green-dark);
+  margin-bottom: 2px;
+  line-height: 1.5;
+  text-shadow: none;
+  letter-spacing: -0.5px;
+}
+
+.festival-title h1 .red-text {
+  color: var(--red-accent);
+}
+
+.festival-title h1 span {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-mid);
+  margin-top: 4px;
+}
+
+.title-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 8px auto 0;
+  max-width: 220px;
+}
+
+.title-divider::before,
+.title-divider::after {
+  content: '';
+  flex: 1;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--gold-main), transparent);
+}
+
+.title-divider span {
+  color: var(--gold-main);
+  font-size: 14px;
+  letter-spacing: 6px;
+}
+
+.envelope-wrapper {
+  position: relative;
+  max-width: 420px;
+  width: 80%;
+  cursor: pointer;
+  perspective: 1500px;
+  transform-style: preserve-3d;
+  animation: floatEnvelope 4s ease-in-out infinite;
+  animation-delay: 0.4s;
+  flex-shrink: 0;
+}
+
+@keyframes floatEnvelope {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.envelope-wrapper:hover {
+  animation-play-state: paused;
+}
+
+.envelope-wrapper:active {
+  transform: scale(0.97);
+}
+
+.envelope-image-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 
+    0 25px 60px rgba(90, 107, 77, 0.3),
+    0 0 0 1px rgba(201, 169, 97, 0.2);
+  transition: all 0.5s ease;
+  background: #7a8a6c;
+}
+
+.envelope-wrapper:hover .envelope-image-container {
+  box-shadow: 
+    0 30px 70px rgba(90, 107, 77, 0.4),
+    0 0 0 3px rgba(201, 169, 97, 0.4);
+  transform: translateY(-5px);
+}
+
+.envelope-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.envelope-hint {
+  position: relative;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--text-mid);
+  padding: 10px 25px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: var(--shadow-soft);
+  white-space: nowrap;
+  animation: pulseHint 2.2s ease-in-out infinite;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(201, 169, 97, 0.3);
+  flex-shrink: 0;
+}
+
+@keyframes pulseHint {
+  0%, 100% { opacity: 0.85; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-5px); }
+}
+
+.envelope-wrapper.opening {
+  animation: openAnimation 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  pointer-events: none;
+}
+
+@keyframes openAnimation {
+  0% { transform: translateY(0) scale(1) rotateX(0deg); opacity: 1; }
+  35% { transform: translateY(-18px) scale(1.08) rotateX(-8deg); opacity: 1; }
+  70% { transform: translateY(-48px) scale(1.28) rotateX(-22deg); opacity: 0.72; }
+  100% { transform: translateY(-82px) scale(1.48) rotateX(-35deg); opacity: 0; }
+}
+
+.envelope-wrapper.opening ~ .envelope-hint {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* ============================================================
+   صفحه دوم: نتایج
+   ============================================================ */
+#winners-screen {
+  background-color: #faf7f0;
+  background-image: 
+    linear-gradient(180deg, #f7f3e8 0%, #faf7f0 100%);
+  padding: 0;
+  align-items: flex-start;
+  overflow-y: auto;
+}
+
+.winners-page-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px 40px 60px;
+  flex: 1;
+}
+
+.company-logo-top-winners {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0 25px;
+  animation: fadeInDown 0.8s ease;
+}
+
+.company-logo-top-winners img {
+  max-width: 280px;
+  width: 60%;
+  height: auto;
+  filter: drop-shadow(0 4px 12px rgba(90, 107, 77, 0.15));
+}
+
+.bronze-medal-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  animation: fadeInDown 1s ease 0.2s backwards;
+}
+
+.bronze-medal-image img {
+  max-width: 220px;
+  width: 50%;
+  height: auto;
+  filter: drop-shadow(0 8px 20px rgba(201, 169, 97, 0.3));
+  transform-origin: center;
+}
+
+/* ⭐ هاله نور درخشان قرمز دور مدال */
+#winners-screen.medal-intro .bronze-medal-image img {
+  animation: redMedalGlow 1.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes redMedalGlow {
+  0% {
+    transform: scale(0.88);
+    filter: drop-shadow(0 0 0 rgba(255, 120, 120, 0));
+  }
+  35% {
+    transform: scale(1.04);
+    filter:
+      drop-shadow(0 0 12px rgba(255, 150, 150, 0.95))
+      drop-shadow(0 0 30px rgba(230, 70, 70, 0.75));
+  }
+  65% {
+    transform: scale(1.01);
+    filter:
+      drop-shadow(0 0 22px rgba(255, 150, 150, 1))
+      drop-shadow(0 0 42px rgba(230, 70, 70, 0.85));
+  }
+  100% {
+    transform: scale(1);
+    filter:
+      drop-shadow(0 8px 20px rgba(255, 120, 120, 0.55))
+      drop-shadow(0 0 16px rgba(255, 150, 150, 0.45));
+  }
+}
+
+#winners-screen.medal-intro .company-logo-top-winners,
+#winners-screen.medal-intro .letter-header,
+#winners-screen.medal-intro .winners-table-wrapper,
+#winners-screen.medal-intro .download-section {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#winners-screen.results-revealed .company-logo-top-winners,
+#winners-screen.results-revealed .letter-header,
+#winners-screen.results-revealed .winners-table-wrapper,
+#winners-screen.results-revealed .download-section {
+  animation: resultsFadeIn 0.65s ease both;
+}
+
+@keyframes resultsFadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.letter-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 10px 20px;
+}
+
+.letter-subtitle {
+  font-size: 18px;
+  color: var(--text-mid);
+  font-weight: 500;
+  margin-bottom: 6px;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+}
+
+.letter-department {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--orange-accent);
+  margin-top: 6px;
+  line-height: 1.6;
+  letter-spacing: -0.2px;
+}
+
+.letter-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin: 22px auto;
+  max-width: 280px;
+}
+
+.letter-divider::before,
+.letter-divider::after {
+  content: '';
+  flex: 1;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--gold-main), transparent);
+}
+
+.letter-divider span {
+  color: var(--gold-main);
+  font-size: 18px;
+  letter-spacing: 8px;
+}
+
+.winners-table-wrapper {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+  box-shadow: 
+    0 10px 40px rgba(90, 107, 77, 0.12),
+    0 0 0 1px rgba(201, 169, 97, 0.25);
+  overflow: hidden;
+  border: 1px solid rgba(201, 169, 97, 0.3);
+  margin-bottom: 20px;
+  margin-inline: auto;
+  width: 100%;
+  max-width: 100%;
+}
+
+.winners-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin: 0 auto;
+}
+
+.winners-table thead th {
+  background: linear-gradient(180deg, var(--green-dark) 0%, var(--green-mid) 100%);
+  color: var(--cream);
+  padding: 18px 14px;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+
+.winners-table thead th:first-child {
+  border-top-right-radius: 16px;
+}
+
+.winners-table thead th:last-child {
+  border-top-left-radius: 16px;
+}
+
+.winners-table th.col-rank { width: 80px; }
+.winners-table th.col-group { width: 130px; }
+.winners-table th.col-code { width: 100px; }
+.winners-table th.col-unit { width: auto; }
+.winners-table th.col-branch { width: 190px; }
+
+.winners-table tbody tr {
+  background: rgba(255, 255, 255, 0.5);
+  transition: all 0.5s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.winners-table tbody tr.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.winners-table tbody tr:nth-child(even) {
+  background: rgba(122, 138, 108, 0.06);
+}
+
+.winners-table tbody tr:hover {
+  background: rgba(201, 169, 97, 0.15);
+}
+
+/* ⭐ همه سلول‌ها وسط‌چین افقی و عمودی */
+.winners-table td {
+  padding: 15px 14px;
+  font-size: 15px;
+  color: var(--text-dark);
+  border-bottom: 1px solid rgba(201, 169, 97, 0.15);
+  vertical-align: middle;
+  text-align: center;
+}
+
+.winners-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.winners-table td.col-rank {
+  color: var(--green-dark);
+  font-weight: 700;
+  font-size: 17px;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.winners-table td.col-code {
+  font-variant-numeric: tabular-nums;
+  color: var(--text-mid);
+  font-weight: 600;
+  text-align: center;
+}
+
+.winners-table td.col-unit {
+  font-weight: 600;
+  text-align: center;
+}
+
+.winners-table td.col-branch {
+  color: var(--text-mid);
+  text-align: center;
+}
+
+/* ============================================================
+   ⭐ رنگ‌بندی نوشته‌ها بر اساس گروه
+   ============================================================ */
+.winners-table tr.group-diamond td.col-group,
+.winners-table tr.group-diamond td.col-unit {
+  color: var(--group-diamond);
+}
+.winners-table tr.group-diamond td.col-rank {
+  color: var(--group-diamond);
+  font-size: 19px;
+}
+
+.winners-table tr.group-gold td.col-group,
+.winners-table tr.group-gold td.col-unit {
+  color: var(--group-gold);
+}
+.winners-table tr.group-gold td.col-rank {
+  color: var(--group-gold);
+  font-size: 19px;
+}
+
+.winners-table tr.group-silver td.col-group,
+.winners-table tr.group-silver td.col-unit {
+  color: var(--group-silver);
+}
+.winners-table tr.group-silver td.col-rank {
+  color: var(--group-silver);
+  font-size: 19px;
+}
+
+/* پس‌زمینه ملایم هر گروه */
+.winners-table tr.group-diamond {
+  background: linear-gradient(90deg, rgba(30, 95, 168, 0.08) 0%, rgba(255, 255, 255, 0.5) 100%);
+}
+.winners-table tr.group-gold {
+  background: linear-gradient(90deg, rgba(201, 162, 39, 0.08) 0%, rgba(255, 255, 255, 0.5) 100%);
+}
+.winners-table tr.group-silver {
+  background: linear-gradient(90deg, rgba(107, 114, 128, 0.08) 0%, rgba(255, 255, 255, 0.5) 100%);
+}
+
+.group-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.group-badge.diamond {
+  color: var(--group-diamond);
+  background: rgba(30, 95, 168, 0.1);
+  border: 1px solid rgba(30, 95, 168, 0.25);
+}
+
+.group-badge.gold {
+  color: var(--group-gold);
+  background: rgba(201, 162, 39, 0.12);
+  border: 1px solid rgba(201, 162, 39, 0.3);
+}
+
+.group-badge.silver {
+  color: var(--group-silver);
+  background: rgba(107, 114, 128, 0.1);
+  border: 1px solid rgba(107, 114, 128, 0.25);
+}
+
+.download-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  padding: 0 10px;
+}
+
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--gold-main) 0%, var(--gold-dark) 100%);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(201, 169, 97, 0.4);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.download-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(201, 169, 97, 0.6);
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-main) 100%);
+}
+
+.download-btn:active {
+  transform: translateY(0);
+}
+
+.download-btn .icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.back-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--green-dark);
+  border: 2px solid var(--green-dark);
+  padding: 10px 22px;
+  border-radius: 30px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.3s;
+  backdrop-filter: blur(10px);
+}
+
+.back-btn:hover {
+  background: var(--green-dark);
+  color: var(--cream);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-strong);
+}
+
+/* ============================================================
+   امضای سازنده
+   ============================================================ */
+.creator-credit {
+  position: fixed;
+  bottom: 6px;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--text-mid);
+  opacity: 0.45;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+  user-select: none;
+  font-family: 'Vazirmatn', Tahoma, sans-serif;
+  transition: opacity 0.3s ease;
+}
+
+.creator-credit:hover {
+  opacity: 0.8;
+}
+
+.creator-credit span {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.creator-credit.on-winners {
+  color: #7a8a6c;
+  opacity: 0.4;
+}
+
+@media (max-width: 768px) {
+  .creator-credit {
+    font-size: 9px;
+    bottom: 4px;
+  }
+  .creator-credit span {
+    padding: 1px 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .creator-credit {
+    transition: none;
+  }
+}
+
+/* ============================================================
+   موبایل
+   ============================================================ */
+@media (max-width: 768px) {
+  .envelope-page-content {
+    padding: 0.5vh 15px 0.5vh;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .company-logo-top {
+    margin-top: -25px;
+    margin-bottom: -20px;
+  }
+
+  .festival-title {
+    margin-top: -25px;
+    margin-bottom: -20px;
+  }
+
+  .envelope-wrapper { 
+    margin-top: -30px;
+    margin-bottom: 0;
+  }
+
+  .envelope-hint { 
+    margin-top: -35px;
+    margin-bottom: 0;
+  }
+
+  .winners-page-content { padding: 20px 15px 50px; }
+
+  .company-logo-top-winners img {
+    max-width: 220px;
+    width: 65%;
+  }
+
+  .bronze-medal-image img {
+    max-width: 160px;
+    width: 45%;
+  }
+
+  .letter-subtitle { font-size: 15px; }
+  .letter-department { font-size: 14px; }
+
+  .back-btn {
+    top: 12px;
+    right: 12px;
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .winners-table th.col-rank { width: 55px; }
+  .winners-table th.col-group { width: 80px; }
+  .winners-table th.col-code { width: 70px; }
+  .winners-table th.col-branch { width: 110px; }
+
+  .winners-table thead th { padding: 12px 6px; font-size: 11px; text-align: center; }
+  .winners-table td { padding: 10px 6px; font-size: 12px; text-align: center; }
+  .winners-table td.col-rank { font-size: 13px; }
+  .winners-table tr.group-diamond td.col-rank,
+  .winners-table tr.group-gold td.col-rank,
+  .winners-table tr.group-silver td.col-rank { font-size: 15px; }
+
+  .group-badge { font-size: 11px; padding: 3px 10px; }
+
+  .download-section {
+    padding: 0 5px;
+    margin-top: 15px;
+  }
+
+  .download-btn {
+    padding: 10px 20px;
+    font-size: 13px;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .company-logo-top {
+    margin-top: -20px;
+    margin-bottom: -15px;
+  }
+
+  .festival-title {
+    margin-top: -20px;
+    margin-bottom: -15px;
+  }
+
+  .envelope-wrapper { 
+    margin-top: -25px;
+    margin-bottom: 0;
+  }
+
+  .envelope-hint { 
+    margin-top: -30px;
+    margin-bottom: 0;
+  }
+
+  .bronze-medal-image img {
+    max-width: 130px;
+    width: 40%;
+  }
+}
+
+/* ============================================================
+   Responsive layout improvements
+   ============================================================ */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+}
+
+.screen {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+#envelope-screen {
+  background-attachment: scroll;
+}
+
+.envelope-page-content {
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: clamp(16px, 3.5vh, 38px) clamp(14px, 3vw, 28px);
+  gap: clamp(14px, 2.8vh, 28px);
+  justify-content: space-between;
+}
+
+.company-logo-top img {
+  width: clamp(150px, 27vw, 260px);
+  max-width: 100%;
+}
+
+.festival-title {
+  width: fit-content;
+  max-width: min(900px, 100%);
+  padding: clamp(10px, 1.8vw, 16px) clamp(14px, 3vw, 28px);
+}
+
+.festival-department {
+  font-size: clamp(16px, 1.8vw, 20px);
+}
+
+.festival-title h1 {
+  font-size: clamp(17px, 2.1vw, 24px);
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.festival-title h1 span {
+  font-size: clamp(14px, 1.6vw, 18px);
+}
+
+.envelope-wrapper {
+  width: clamp(220px, 42vw, 420px);
+  max-width: 100%;
+  margin: 0;
+  flex-shrink: 1;
+}
+
+.envelope-hint {
+  max-width: 100%;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.7;
+  padding: 9px clamp(14px, 3vw, 25px);
+  font-size: clamp(12px, 1.4vw, 14px);
+}
+
+.winners-page-content {
+  width: 100%;
+  max-width: 1000px;
+  padding-inline: clamp(12px, 4vw, 40px);
+  margin-inline: auto;
+}
+
+.winners-table-wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-inline: auto;
+}
+
+.winners-table {
+  min-width: 640px;
+  margin-inline: auto;
+}
+
+.winners-table thead th {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+.back-btn {
+  top: max(12px, env(safe-area-inset-top));
+  right: max(12px, env(safe-area-inset-right));
+}
+
+@media (max-width: 768px) {
+  .envelope-page-content {
+    padding: max(14px, env(safe-area-inset-top)) 14px
+             max(18px, env(safe-area-inset-bottom));
+    gap: clamp(12px, 2.5vh, 22px);
+    justify-content: space-evenly;
+  }
+
+  .company-logo-top,
+  .festival-title,
+  .envelope-wrapper,
+  .envelope-hint {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .company-logo-top img {
+    width: clamp(135px, 42vw, 220px);
+  }
+
+  .festival-title {
+    width: 100%;
+    max-width: 560px;
+  }
+
+  .festival-department {
+    font-size: clamp(14px, 3.8vw, 17px);
+    margin-bottom: 6px;
+  }
+
+  .festival-title h1 {
+    font-size: clamp(16px, 4.2vw, 22px);
+    letter-spacing: 0;
+  }
+
+  .festival-title h1 span {
+    font-size: clamp(13px, 3.5vw, 17px);
+  }
+
+  .envelope-wrapper {
+    width: min(76vw, 360px);
+  }
+
+  .envelope-hint {
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .winners-page-content {
+    padding: 72px 12px 32px;
+  }
+
+  .company-logo-top-winners {
+    padding-bottom: 16px;
+  }
+
+  .company-logo-top-winners img {
+    width: min(62%, 210px);
+  }
+
+  .bronze-medal-image {
+    margin-bottom: 14px;
+  }
+
+  .bronze-medal-image img {
+    width: min(42vw, 155px);
+    max-width: 100%;
+  }
+
+  .letter-header {
+    margin-bottom: 20px;
+    padding: 8px 6px;
+  }
+
+  .letter-subtitle {
+    font-size: clamp(14px, 3.8vw, 17px);
+    line-height: 1.8;
+  }
+
+  .letter-department {
+    font-size: clamp(12px, 3.4vw, 15px);
+  }
+
+  .letter-divider {
+    margin: 14px auto;
+  }
+
+  .winners-table {
+    min-width: 600px;
+  }
+
+  .download-btn {
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.7;
+  }
+}
+
+@media (max-width: 400px) {
+  .envelope-page-content {
+    padding-inline: 10px;
+    gap: 12px;
+  }
+
+  .festival-title {
+    padding: 10px 11px;
+    border-radius: 12px;
+  }
+
+  .festival-department {
+    font-size: clamp(13px, 3.9vw, 15px);
+    margin-bottom: 5px;
+  }
+
+  .festival-title h1 {
+    font-size: clamp(15px, 4.4vw, 17px);
+    line-height: 1.55;
+  }
+
+  .festival-title h1 span {
+    font-size: 13px;
+  }
+
+  .title-divider {
+    margin-top: 6px;
+    gap: 8px;
+  }
+
+  .title-divider span {
+    font-size: 12px;
+    letter-spacing: 3px;
+  }
+
+  .envelope-wrapper {
+    width: min(78vw, 300px);
+  }
+
+  .envelope-hint {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .back-btn {
+    top: max(8px, env(safe-area-inset-top));
+    right: max(8px, env(safe-area-inset-right));
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+}
+
+@media (max-height: 650px) and (max-width: 900px) {
+  .envelope-page-content {
+    min-height: 100vh;
+    min-height: 100svh;
+    justify-content: flex-start;
+    gap: 14px;
+    padding-top: 14px;
+    padding-bottom: 18px;
+  }
+
+  .envelope-wrapper {
+    width: clamp(180px, 38vh, 300px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     صفحه اول: پاکت
+     ============================================================ -->
+<div id="envelope-screen" class="screen active">
+  <div class="envelope-page-content">
+
+    <div class="company-logo-top">
+      <img src="assets/logo.png" alt="بیمه کارآفرین">
+    </div>
+
+    <div class="festival-title">
+      <span class="festival-department">مدیریت باربری</span>
+      <span class="festival-department">مدیریت امور نمایندگان و کارگزاران</span>
+      <h1>
+        <span class="red-text">نتایج نهایی</span> جشنواره فروش بیمه‌های آتش‌سوزی
+        <span>نیم‌سال اول 1405</span>
+      </h1>
+      <div class="title-divider"><span>✦ ✦ ✦</span></div>
+    </div>
+
+    <div class="envelope-wrapper" id="envelopeWrapper" onclick="openEnvelope()">
+      <div class="envelope-image-container">
+        <img src="assets/envelope.png" alt="پاکت نامه جشنواره" class="envelope-image">
+      </div>
+    </div>
+
+    <div class="envelope-hint" id="envelopeHint">
+      👆 برای مشاهده لیست اسامی کلیک کنید
+    </div>
+
+  </div>
+  <div class="creator-credit">
+    <span>Designed by P.Daryadel</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     صفحه دوم: نتایج
+     ============================================================ -->
+<div id="winners-screen" class="screen">
+
+  <button class="back-btn" onclick="goBack()">← بازگشت</button>
+
+  <div class="winners-page-content">
+
+    <div class="company-logo-top-winners">
+      <img src="assets/logo.png" alt="بیمه کارآفرین">
+    </div>
+
+    <div class="bronze-medal-image">
+      <img src="assets/medal.png" alt="مدال">
+    </div>
+
+    <header class="letter-header">
+      <p class="letter-subtitle">جشنواره فروش بیمه‌های آتش‌سوزی</p>
+      <span class="letter-department">مدیریت باربری</span>
+      <span class="letter-department">مدیریت امور نمایندگان و کارگزاران</span>
+      <div class="letter-divider"><span>✦ ✦ ✦</span></div>
+    </header>
+
+    <div class="winners-table-wrapper">
+      <table class="winners-table">
+        <thead>
+          <tr>
+            <th class="col-rank">رتبه</th>
+            <th class="col-group">گروه</th>
+            <th class="col-code">کد</th>
+            <th class="col-unit">معرف</th>
+            <th class="col-branch">شعبه</th>
+          </tr>
+        </thead>
+        <tbody id="winners-tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="download-section">
+      <a href="assets/atashsoozi-winners.pdf" download class="download-btn">
+        <span class="icon">📥</span>
+        دانلود فایل PDF 
+      </a>
+    </div>
+
+  </div>
+  <div class="creator-credit on-winners">
+    <span>Designed by P.Daryadel</span>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   داده‌های اکسل (آتش سوزی)
+   ============================================================ */
+const WINNERS_DATA = [
+  // ===== الماس (۵ نفر) =====
+  {"rank": 1, "group": "diamond", "code": "9037", "unit": "آسايش فرداي کارآفرين کد 9037", "branch": "تهران شرق کد 41"},
+  {"rank": 2, "group": "diamond", "code": "9022", "unit": "بشارت پسند کد 9022", "branch": "قزوين کد 15"},
+  {"rank": 3, "group": "diamond", "code": "1118", "unit": "ملکه فرازي کد 1118", "branch": "تهران مرکز کد 1"},
+  {"rank": 4, "group": "diamond", "code": "2553", "unit": "مجيد شميراني کد 2553", "branch": "تهران مرکز کد 1"},
+  {"rank": 5, "group": "diamond", "code": "1133", "unit": "فاطمه رحماني خليلي کد 1133", "branch": "تهران مرکز کد 1"},
+
+  // ===== طلا (۱۰ نفر) =====
+  {"rank": 1, "group": "gold", "code": "3236", "unit": "عابدي کد 3236", "branch": "تهران مرکز کد 1"},
+  {"rank": 2, "group": "gold", "code": "3351", "unit": "رضا الهي منش کد 3351", "branch": "زاهدان کد 13"},
+  {"rank": 3, "group": "gold", "code": "1013", "unit": "غلامحسن غلامي کد 1013", "branch": "تهران مرکز کد 1"},
+  {"rank": 4, "group": "gold", "code": "1015", "unit": "اميررضا صفائي کد 1015", "branch": "اصفهان کد 4"},
+  {"rank": 5, "group": "gold", "code": "3111", "unit": "حميدرضا خمر کد 3111", "branch": "زاهدان کد 13"},
+  {"rank": 6, "group": "gold", "code": "8882", "unit": "زندگي خوب کوير ايرانيان کد 8882", "branch": "يزد کد 28"},
+  {"rank": 7, "group": "gold", "code": "4682", "unit": "مهرداد سعادت خواه کد 4682", "branch": "اراک کد 25"},
+  {"rank": 8, "group": "gold", "code": "1174", "unit": "هادي مظاهريون کد 1174", "branch": "اصفهان کد 4"},
+  {"rank": 9, "group": "gold", "code": "2751", "unit": "مهدي نعمتي زاده قمي کد 2751", "branch": "قم کد 16"},
+  {"rank": 10, "group": "gold", "code": "2121", "unit": "ليلي شمس کد 2121", "branch": "تهران مرکز کد 1"},
+
+  // ===== نقره (۱۲۹ نفر) =====
+  {"rank": 1, "group": "silver", "code": "8214", "unit": "محمد رضا عابدي روشن کد 8214", "branch": "تهران مرکز کد 1"},
+  {"rank": 2, "group": "silver", "code": "2142", "unit": "مريم حقويردي اوصالو کد 2142", "branch": "اروميه کد 3"},
+  {"rank": 3, "group": "silver", "code": "9644", "unit": "کوثر قرباني کد 9644", "branch": "سمنان کد 12"},
+  {"rank": 4, "group": "silver", "code": "3023", "unit": "محمد شجاع نسب کد 3023", "branch": "اراک کد 25"},
+  {"rank": 5, "group": "silver", "code": "7284", "unit": "آراد سفير آرامش کد 7284", "branch": "اراک کد 25"},
+  {"rank": 6, "group": "silver", "code": "1239", "unit": "اسماعيل فريدوني کد 1239", "branch": "تهران شرق کد 41"},
+  {"rank": 7, "group": "silver", "code": "70030", "unit": "کارگزاري رسمي بيمه مستقيم برخط ايمن پوشش شاهين نويان کد 70030", "branch": "تهران مرکز کد 1"},
+  {"rank": 8, "group": "silver", "code": "7605", "unit": "تدبير سلامت پايا بين الملل کد 7605", "branch": "تهران مرکز کد 1"},
+  {"rank": 9, "group": "silver", "code": "1712", "unit": "مريم ملک گودرزي کد 1712", "branch": "اصفهان کد 4"},
+  {"rank": 10, "group": "silver", "code": "1769", "unit": "آرزو نور بخش کد 1769", "branch": "اصفهان کد 4"},
+  {"rank": 11, "group": "silver", "code": "4350", "unit": "عزيزاله صديقي فراهاني کد 4350", "branch": "اراک کد 25"},
+  {"rank": 12, "group": "silver", "code": "8000", "unit": "تداوم هستي کد 8000", "branch": "تهران مرکز کد 1"},
+  {"rank": 13, "group": "silver", "code": "9002", "unit": "خدمات بيمه اي بهسار آفرين کد 9002", "branch": "تهران مرکز کد 1"},
+  {"rank": 14, "group": "silver", "code": "4960", "unit": "فاطمه دنکوب کد 4960", "branch": "گرگان کد 21"},
+  {"rank": 15, "group": "silver", "code": "2332", "unit": "حسين فرح دل کد 2332", "branch": "کاشان کد 20"},
+  {"rank": 16, "group": "silver", "code": "9685", "unit": "مصطفي عربي کد 9685", "branch": "کاشان کد 20"},
+  {"rank": 17, "group": "silver", "code": "7237", "unit": "مهدي علي محمدي کد 7237", "branch": "اراک کد 25"},
+  {"rank": 18, "group": "silver", "code": "1518", "unit": "ندا ماهر کد 1518", "branch": "قزوين کد 15"},
+  {"rank": 19, "group": "silver", "code": "7375", "unit": "کارگزاري رسمي بيمه مستقيم برخط ايساتيس پويا کد 7375", "branch": "يزد کد 28"},
+  {"rank": 20, "group": "silver", "code": "1564", "unit": "سعيد محمديان کد 1564", "branch": "سمنان کد 12"},
+  {"rank": 21, "group": "silver", "code": "4968", "unit": "مجيد جعفري کد 4968", "branch": "تبريز کد 2"},
+  {"rank": 22, "group": "silver", "code": "3774", "unit": "فاطمه مرادي قمصري کد 3774", "branch": "کاشان کد 20"},
+  {"rank": 23, "group": "silver", "code": "3776", "unit": "مريم احمديان نجف آبادي کد 3776", "branch": "نجف آباد کد 39"},
+  {"rank": 24, "group": "silver", "code": "1127", "unit": "فاطمه زارع کد 1127", "branch": "تبريز کد 2"},
+  {"rank": 25, "group": "silver", "code": "2080", "unit": "مجيد فرشيدنيا کد 2080", "branch": "بندرعباس کد 26"},
+  {"rank": 26, "group": "silver", "code": "7560", "unit": "کامران مسعودي کد 7560", "branch": "شعبه شهرراز کد 74"},
+  {"rank": 27, "group": "silver", "code": "7024", "unit": "امير هوشنگ لطفي کد 7024", "branch": "تهران مرکز کد 1"},
+  {"rank": 28, "group": "silver", "code": "8675", "unit": "حامي شميم زندگي کد 8675", "branch": "تهران مرکز کد 1"},
+  {"rank": 29, "group": "silver", "code": "4891", "unit": "مهدي دستجردي کد 4891", "branch": "يزد کد 28"},
+  {"rank": 30, "group": "silver", "code": "4559", "unit": "عادل امامي کد 4559", "branch": "اصفهان کد 4"},
+  {"rank": 31, "group": "silver", "code": "1484", "unit": "زهرا والايي شايسته کد 1484", "branch": "تهران مرکز کد 1"},
+  {"rank": 32, "group": "silver", "code": "1001", "unit": "حميد دهبد کد 1001", "branch": "تهران مرکز کد 1"},
+  {"rank": 33, "group": "silver", "code": "8335", "unit": "اباذر مهرعلي کد 8335", "branch": "يزد کد 28"},
+  {"rank": 34, "group": "silver", "code": "3984", "unit": "مريم رحماني کد 3984", "branch": "قزوين کد 15"},
+  {"rank": 35, "group": "silver", "code": "1142", "unit": "حبيب اله دواني کد 1142", "branch": "شيراز کد 14"},
+  {"rank": 36, "group": "silver", "code": "2673", "unit": "فاطمه خدري کد 2673", "branch": "بوشهر کد 7"},
+  {"rank": 37, "group": "silver", "code": "9701", "unit": "نفيسه وثوقي کد 9701", "branch": "دليجان کد 51"},
+  {"rank": 38, "group": "silver", "code": "4734", "unit": "سحر محمدباقري کد 4734", "branch": "تهران غرب کد 40"},
+  {"rank": 39, "group": "silver", "code": "4737", "unit": "مهسا بهرامي نيا کد 4737", "branch": "دليجان کد 51"},
+  {"rank": 40, "group": "silver", "code": "9439", "unit": "شيرين عبدالرزاق کد 9439", "branch": "تهران شرق کد 41"},
+  {"rank": 41, "group": "silver", "code": "2322", "unit": "حميدرضا بهارلوئي يانچشمه کد 2322", "branch": "اهواز کد 10"},
+  {"rank": 42, "group": "silver", "code": "9493", "unit": "فرنوش ناظمي کهجوق کد 9493", "branch": "تبريز کد 2"},
+  {"rank": 43, "group": "silver", "code": "4870", "unit": "مشاوران نسل اميد کد 4870", "branch": "تهران شرق کد 41"},
+  {"rank": 44, "group": "silver", "code": "1799", "unit": "فاطمه قاسمي زريني کد 1799", "branch": "ساري کد 24"},
+  {"rank": 45, "group": "silver", "code": "2280", "unit": "سيده فاطمه فتاحي ساروي کد 2280", "branch": "ساري کد 24"},
+  {"rank": 46, "group": "silver", "code": "1691", "unit": "اکرم رضائيان کد 1691", "branch": "تبريز کد 2"},
+  {"rank": 47, "group": "silver", "code": "3868", "unit": "عباس ملکي کد 3868", "branch": "بيرجند کد 63"},
+  {"rank": 48, "group": "silver", "code": "2313", "unit": "احمد ظريف هوتکاني کد 2313", "branch": "مشهد کد 9"},
+  {"rank": 49, "group": "silver", "code": "2886", "unit": "اسماعيل رمضاني کد 2886", "branch": "قم کد 16"},
+  {"rank": 50, "group": "silver", "code": "9494", "unit": "مهسا خاکسار کد 9494", "branch": "ساري کد 24"},
+  {"rank": 51, "group": "silver", "code": "2374", "unit": "علي طاهري کد 2374", "branch": "گرگان کد 21"},
+  {"rank": 52, "group": "silver", "code": "8155", "unit": "محمد رضا مهدي نژاد اشکذري کد 8155", "branch": "يزد کد 28"},
+  {"rank": 53, "group": "silver", "code": "1538", "unit": "ريحانه شمس کد 1538", "branch": "کاشان کد 20"},
+  {"rank": 54, "group": "silver", "code": "3060", "unit": "امين ارغده کد 3060", "branch": "اهواز کد 10"},
+  {"rank": 55, "group": "silver", "code": "2490", "unit": "حميده باجمالوي رستمي کد 2490", "branch": "تهران مرکز کد 1"},
+  {"rank": 56, "group": "silver", "code": "4500", "unit": "کد 4500", "branch": "زنجان کد 11"},
+  {"rank": 57, "group": "silver", "code": "2324", "unit": "جاويد نيک رفتار خياباني کد 2324", "branch": "تبريز کد 2"},
+  {"rank": 58, "group": "silver", "code": "4227", "unit": "مريم دادفر کد 4227", "branch": "بندرعباس کد 26"},
+  {"rank": 59, "group": "silver", "code": "3964", "unit": "راضيه جمشيديان کد 3964", "branch": "نجف آباد کد 39"},
+  {"rank": 60, "group": "silver", "code": "4827", "unit": "امير رشيدي کد 4827", "branch": "اصفهان کد 4"},
+  {"rank": 61, "group": "silver", "code": "1666", "unit": "طاهره حسيني کد 1666", "branch": "تهران مرکز کد 1"},
+  {"rank": 62, "group": "silver", "code": "1462", "unit": "فرناز اسداله زوج کد 1462", "branch": "شيراز کد 14"},
+  {"rank": 63, "group": "silver", "code": "1461", "unit": "رضوان متولي حبيبي کد 1461", "branch": "مشهد کد 9"},
+  {"rank": 64, "group": "silver", "code": "4404", "unit": "حسين حشمتي کد 4404", "branch": "مشهد کد 9"},
+  {"rank": 65, "group": "silver", "code": "2100", "unit": "فاطمه ناصري کد 2100", "branch": "تهران مرکز کد 1"},
+  {"rank": 66, "group": "silver", "code": "4949", "unit": "مصطفي براري ضيابري کد 4949", "branch": "رشت کد 22"},
+  {"rank": 67, "group": "silver", "code": "2801", "unit": "مهسا نظري کد 2801", "branch": "تهران مرکز کد 1"},
+  {"rank": 68, "group": "silver", "code": "70013", "unit": "حامد رزمي کد 70013", "branch": "مشهد کد 9"},
+  {"rank": 69, "group": "silver", "code": "1149", "unit": "آمنه کرمي کد 1149", "branch": "شيراز کد 14"},
+  {"rank": 70, "group": "silver", "code": "1572", "unit": "اکبر بابادي کد 1572", "branch": "اهواز کد 10"},
+  {"rank": 71, "group": "silver", "code": "9308", "unit": "ميلاد زماني بريجستانکي کد 9308", "branch": "رشت کد 22"},
+  {"rank": 72, "group": "silver", "code": "8910", "unit": "ابوالفضل حلم زاده کد 8910", "branch": "مشهد کد 9"},
+  {"rank": 73, "group": "silver", "code": "1202", "unit": "فاطمه کريملو کد 1202", "branch": "کرج کد 29"},
+  {"rank": 74, "group": "silver", "code": "1460", "unit": "حسين نيکوکردار صنوبري کد 1460", "branch": "مشهد کد 9"},
+  {"rank": 75, "group": "silver", "code": "9642", "unit": "احمد نوريان کد 9642", "branch": "اصفهان کد 4"},
+  {"rank": 76, "group": "silver", "code": "9445", "unit": "سارا کرکه آبادي کد 9445", "branch": "سمنان کد 12"},
+  {"rank": 77, "group": "silver", "code": "3837", "unit": "سميه غلامي کد 3837", "branch": "زنجان کد 11"},
+  {"rank": 78, "group": "silver", "code": "1187", "unit": "علي محمد مهدي نژاد اشکذري کد 1187", "branch": "يزد کد 28"},
+  {"rank": 79, "group": "silver", "code": "8384", "unit": "مجيد خالقي فرقاني کد 8384", "branch": "مشهد کد 9"},
+  {"rank": 80, "group": "silver", "code": "1193", "unit": "محسن مظاهري کد 1193", "branch": "نجف آباد کد 39"},
+  {"rank": 81, "group": "silver", "code": "3928", "unit": "مير جلال موسوي اصدق کد 3928", "branch": "تبريز کد 2"},
+  {"rank": 82, "group": "silver", "code": "3801", "unit": "آرش محزوني ريزي کد 3801", "branch": "اصفهان کد 4"},
+  {"rank": 83, "group": "silver", "code": "4484", "unit": "فاطمه حکيم زاده شونقاري کد 4484", "branch": "مهاباد کد 34"},
+  {"rank": 84, "group": "silver", "code": "1688", "unit": "ثروت الياسي کد 1688", "branch": "قزوين کد 15"},
+  {"rank": 85, "group": "silver", "code": "3884", "unit": "نجمه شعباني کد 3884", "branch": "قم کد 16"},
+  {"rank": 86, "group": "silver", "code": "7444", "unit": "علي حراجي کد 7444", "branch": "اصفهان کد 4"},
+  {"rank": 87, "group": "silver", "code": "2390", "unit": "فرزانه نصيري کد 2390", "branch": "تهران مرکز کد 1"},
+  {"rank": 88, "group": "silver", "code": "2162", "unit": "رضا کسنوي يزدي کد 2162", "branch": "مشهد کد 9"},
+  {"rank": 89, "group": "silver", "code": "2488", "unit": "اسمعيل مدانلو کد 2488", "branch": "ساري کد 24"},
+  {"rank": 90, "group": "silver", "code": "4853", "unit": "آرزو شجاعي باغيني کد 4853", "branch": "کرمان کد 18"},
+  {"rank": 91, "group": "silver", "code": "3873", "unit": "فاطمه سعادت کد 3873", "branch": "دليجان کد 51"},
+  {"rank": 92, "group": "silver", "code": "1664", "unit": "شيرين پورعزيزان کد 1664", "branch": "اصفهان کد 4"},
+  {"rank": 93, "group": "silver", "code": "1755", "unit": "مريم خشکبارفروشها کد 1755", "branch": "قزوين کد 15"},
+  {"rank": 94, "group": "silver", "code": "1828", "unit": "اسماعيل عباسيان افسر کد 1828", "branch": "تبريز کد 2"},
+  {"rank": 95, "group": "silver", "code": "1010", "unit": "احمد کلانتر کد 1010", "branch": "يزد کد 28"},
+  {"rank": 96, "group": "silver", "code": "1822", "unit": "علي فرهنگ کد 1822", "branch": "اهواز کد 10"},
+  {"rank": 97, "group": "silver", "code": "3631", "unit": "شهين صديقي کد 3631", "branch": "اروميه کد 3"},
+  {"rank": 98, "group": "silver", "code": "2531", "unit": "آربوني کد 2531", "branch": "زنجان کد 11"},
+  {"rank": 99, "group": "silver", "code": "7324", "unit": "کارگزاري بيمه آنديا سوشيانت کد 7324", "branch": "زنجان کد 11"},
+  {"rank": 100, "group": "silver", "code": "4443", "unit": "سيد مرتضي حسيني حسين آبادي کد 4443", "branch": "مشهد کد 9"},
+  {"rank": 101, "group": "silver", "code": "3854", "unit": "سوزان اميني کد 3854", "branch": "اروميه کد 3"},
+  {"rank": 102, "group": "silver", "code": "1932", "unit": "کاظم ليامي کد 1932", "branch": "اهواز کد 10"},
+  {"rank": 103, "group": "silver", "code": "4880", "unit": "محسن قاسمي رشک سفلي کد 4880", "branch": "کرمان کد 18"},
+  {"rank": 104, "group": "silver", "code": "1321", "unit": "اکبر هنرور کد 1321", "branch": "تهران مرکز کد 1"},
+  {"rank": 105, "group": "silver", "code": "1587", "unit": "مجيد اياز کد 1587", "branch": "مشهد کد 9"},
+  {"rank": 106, "group": "silver", "code": "7782", "unit": "وحيد نعمتيان منعمي کد 7782", "branch": "مشهد کد 9"},
+  {"rank": 107, "group": "silver", "code": "9329", "unit": "مليحه دولتياري کد 9329", "branch": "مشهد کد 9"},
+  {"rank": 108, "group": "silver", "code": "70058", "unit": "کارگزاري رسمي بيمه مستقيم برخط امين مسير نيک کد 70058", "branch": "تهران مرکز کد 1"},
+  {"rank": 109, "group": "silver", "code": "7533", "unit": "محسن رحيميان کد 7533", "branch": "اصفهان کد 4"},
+  {"rank": 110, "group": "silver", "code": "4623", "unit": "علي اصغر ايماني کد 4623", "branch": "يزد کد 28"},
+  {"rank": 111, "group": "silver", "code": "4941", "unit": "منير طاهري کد 4941", "branch": "مشهد کد 9"},
+  {"rank": 112, "group": "silver", "code": "9624", "unit": "جعفر جهانبازي کد 9624", "branch": "شهرکرد کد 30"},
+  {"rank": 113, "group": "silver", "code": "3153", "unit": "امير قطبي نيا کد 3153", "branch": "کرج کد 29"},
+  {"rank": 114, "group": "silver", "code": "3673", "unit": "احسان سلطان آبادي کد 3673", "branch": "کرمانشاه کد 19"},
+  {"rank": 115, "group": "silver", "code": "3954", "unit": "معصومه موسي پور کد 3954", "branch": "بندرعباس کد 26"},
+  {"rank": 116, "group": "silver", "code": "7979", "unit": "کارگزاري رسمي بيمه مستقيم آتا کد 7979", "branch": "تهران مرکز کد 1"},
+  {"rank": 117, "group": "silver", "code": "4983", "unit": "شيوا خورشيدي کد 4983", "branch": "اراک کد 25"},
+  {"rank": 118, "group": "silver", "code": "1496", "unit": "ندا فرزانه خو کد 1496", "branch": "اصفهان کد 4"},
+  {"rank": 119, "group": "silver", "code": "1663", "unit": "فاطمه فدائي کد 1663", "branch": "اصفهان کد 4"},
+  {"rank": 120, "group": "silver", "code": "2776", "unit": "اکرم جهاني کد 2776", "branch": "کاشان کد 20"},
+  {"rank": 121, "group": "silver", "code": "1355", "unit": "يداله شريعتي کد 1355", "branch": "سنندج کد 17"},
+  {"rank": 122, "group": "silver", "code": "2674", "unit": "فريبا ناصحي نيا کد 2674", "branch": "مشهد کد 9"},
+  {"rank": 123, "group": "silver", "code": "4416", "unit": "سپيده حيدري کد 4416", "branch": "زنجان کد 11"},
+  {"rank": 124, "group": "silver", "code": "2872", "unit": "هدي ناصري کد 2872", "branch": "تبريز کد 2"},
+  {"rank": 125, "group": "silver", "code": "2879", "unit": "سميه شکوري شريفي کد 2879", "branch": "قزوين کد 15"},
+  {"rank": 126, "group": "silver", "code": "1243", "unit": "افسانه شمشيري کد 1243", "branch": "شيراز کد 14"},
+  {"rank": 127, "group": "silver", "code": "1208", "unit": "قاسم سعيداوي کد 1208", "branch": "اهواز کد 10"},
+  {"rank": 128, "group": "silver", "code": "4643", "unit": "محمد رئوف حسين زاده کد 4643", "branch": "اروميه کد 3"},
+  {"rank": 129, "group": "silver", "code": "2007", "unit": "فاطمه اسمعيلي کد 2007", "branch": "ساري کد 24"},
+  {"rank": 130, "group": "silver", "code": "9499", "unit": "سارا خاني رزي کد 9499", "branch": "اردبيل کد 5"},
+  {"rank": 131, "group": "silver", "code": "7207", "unit": "رضا فروغي فر کد 7207", "branch": "تبريز کد 2"},
+  {"rank": 132, "group": "silver", "code": "9472", "unit": "سودابه عباسي کد 9472", "branch": "شعبه شهرراز کد 74"},
+  {"rank": 133, "group": "silver", "code": "2010", "unit": "حسين ابراهيمي کد 2010", "branch": "شيراز کد 14"},
+  {"rank": 134, "group": "silver", "code": "3918", "unit": "فرزانه پيکان پور کد 3918", "branch": "اصفهان کد 4"},
+  {"rank": 135, "group": "silver", "code": "1446", "unit": "مريم ملا احمدي کد 1446", "branch": "اصفهان کد 4"},
+  {"rank": 136, "group": "silver", "code": "3778", "unit": "رضا عبدالهي مندولکاني کد 3778", "branch": "خوي کد 33"},
+  {"rank": 137, "group": "silver", "code": "2423", "unit": "سميه سادات طاهري ساري کد 2423", "branch": "کاشان کد 20"},
+  {"rank": 138, "group": "silver", "code": "1703", "unit": "محمدرضا گرويي کد 1703", "branch": "قزوين کد 15"},
+  {"rank": 139, "group": "silver", "code": "7864", "unit": "کارگزاري رسمي بيمه مستقيم بيمه گران رهپويان انديشه فرتاک کد 7864", "branch": "زنجان کد 11"},
+  {"rank": 140, "group": "silver", "code": "9038", "unit": "نمايندگي بيمه اميد گستران کار آفرين تربت کد 9038", "branch": "مشهد کد 9"},
+  {"rank": 141, "group": "silver", "code": "1175", "unit": "مريم رضائي کد 1175", "branch": "شيراز کد 14"},
+  {"rank": 142, "group": "silver", "code": "1949", "unit": "مهرداد جعفرزاده قهدريجاني کد 1949", "branch": "اصفهان کد 4"},
+  {"rank": 143, "group": "silver", "code": "1294", "unit": "مريم صاحبداري کد 1294", "branch": "مشهد کد 9"},
+  {"rank": 144, "group": "silver", "code": "1214", "unit": "شهرزاد آتشکار کد 1214", "branch": "شيراز کد 14"}
+];
+
+const GROUP_LABELS = {
+  diamond: { text: "الماس", cls: "diamond" },
+  gold: { text: "طلا", cls: "gold" },
+  silver: { text: "نقره", cls: "silver" }
+};
+
+const GROUP_ORDER = ["diamond", "gold", "silver"];
+
+function toFa(num) {
+  const digits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+  return String(num).replace(/\d/g, d => digits[d]);
+}
+
+function fixPersian(text) {
+  if (!text) return "";
+  return String(text).replace(/ي/g, "ی").replace(/ك/g, "ک").replace(/ة/g, "ه");
+}
+
+function openEnvelope() {
+  const wrapper = document.getElementById("envelopeWrapper");
+  if (wrapper.classList.contains("opening")) return;
+  
+  wrapper.classList.add("opening");
+  
+  const hint = document.getElementById("envelopeHint");
+  if (hint) hint.style.opacity = "0";
+  
+  setTimeout(() => {
+    document.getElementById("envelope-screen").classList.remove("active");
+    const winnersScreen = document.getElementById("winners-screen");
+    winnersScreen.classList.add("active", "medal-intro");
+    winnersScreen.classList.remove("results-revealed");
+    window.scrollTo(0, 0);
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const medalDelay = reducedMotion ? 150 : 1800;
+
+    setTimeout(() => {
+      winnersScreen.classList.remove("medal-intro");
+      winnersScreen.classList.add("results-revealed");
+      loadWinners();
+    }, medalDelay);
+  }, 1800);
+}
+
+function loadWinners() {
+  const tbody = document.getElementById("winners-tbody");
+  
+  try {
+    const winners = [...WINNERS_DATA].sort((a, b) => {
+      const groupDiff = GROUP_ORDER.indexOf(a.group) - GROUP_ORDER.indexOf(b.group);
+      if (groupDiff !== 0) return groupDiff;
+      return a.rank - b.rank;
+    });
+    
+    tbody.innerHTML = "";
+    
+    winners.forEach((winner, i) => {
+      const tr = document.createElement("tr");
+      const groupInfo = GROUP_LABELS[winner.group];
+      tr.className = `group-${groupInfo.cls}`;
+      tr.innerHTML = `
+        <td class="col-rank">${toFa(winner.rank)}</td>
+        <td class="col-group"><span class="group-badge ${groupInfo.cls}">${groupInfo.text}</span></td>
+        <td class="col-code">${toFa(winner.code)}</td>
+        <td class="col-unit">${fixPersian(winner.unit)}</td>
+        <td class="col-branch">${fixPersian(winner.branch)}</td>
+      `;
+      tbody.appendChild(tr);
+      
+      setTimeout(() => {
+        tr.classList.add("revealed");
+      }, 100 + i * 40);
+    });
+  } catch (err) {
+    console.error("خطا:", err);
+    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:30px;">خطا در بارگذاری داده‌ها</td></tr>`;
+  }
+}
+
+function goBack() {
+  const winnersScreen = document.getElementById("winners-screen");
+  winnersScreen.classList.remove("active", "medal-intro", "results-revealed");
+  document.getElementById("envelope-screen").classList.add("active");
+  
+  const wrapper = document.getElementById("envelopeWrapper");
+  wrapper.classList.remove("opening");
+  
+  const hint = document.getElementById("envelopeHint");
+  if (hint) hint.style.opacity = "1";
+  
+  document.getElementById("winners-tbody").innerHTML = "";
+}
+
+document.addEventListener("keydown", (e) => {
+  if (document.getElementById("winners-screen").classList.contains("active")) {
+    if (e.key === "Escape") goBack();
+  } else if (document.getElementById("envelope-screen").classList.contains("active")) {
+    if (e.key === " " || e.key === "Enter") {
+      e.preventDefault();
+      openEnvelope();
+    }
+  }
+});
+</script>
+</body>
+</html>
